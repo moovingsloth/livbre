@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchUser } from '../actions/userActions';
+import { fetchUser, logoutUser } from '../actions/userActions';
 
 interface UserState {
   user: {
@@ -20,6 +20,9 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, action: PayloadAction<UserState['user']>) => {
       state.user = action.payload;
+    });
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.user = null;
     });
   },
 });

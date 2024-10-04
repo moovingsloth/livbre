@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../lib/store';
-import { fetchUser } from '../../actions/userActions';
+import { fetchUser, logoutUser } from '../../actions/userActions';
 import { Button } from '../../components/ui/button';
-import { LogIn } from 'lucide-react';
+import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
 const LoginButton: React.FC = () => {
@@ -18,10 +18,18 @@ const LoginButton: React.FC = () => {
     console.log('User State:', user); // Log the user state to verify
   }, [user]);
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
   if (user) {
     return (
-      <Button variant="default" className="bg-green-600 hover:bg-green-700 text-white">
-        Logged in as {user.googleId}
+      <Button
+        variant="default"
+        className="bg-red-600 hover:bg-red-700 text-white"
+        onClick={handleLogout}
+      >
+        <LogOut className="mr-2 h-4 w-4" /> Logout
       </Button>
     );
   }

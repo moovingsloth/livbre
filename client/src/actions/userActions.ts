@@ -15,3 +15,14 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
   const data = await fetchUserData();
   return data;
 });
+
+export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
+  const response = await fetch('/api/logout', {
+    method: 'GET',
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return null; // 로그아웃 후 user 상태를 null로 설정
+});

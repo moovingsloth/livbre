@@ -22,6 +22,15 @@ module.exports = app => {
     }
     );
 
+    app.get('/api/logout', (req, res) => {
+        req.logout((err) => {
+          if (err) {
+            return res.status(500).send({ error: 'Logout failed' });
+          }
+          res.send({ success: true });
+        });
+      });
+
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
     });

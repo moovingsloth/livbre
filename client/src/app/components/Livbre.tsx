@@ -10,6 +10,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import LoginButton from "./LoginButton"
 
 export default function Component() {
   const [isHovered, setIsHovered] = useState(false)
@@ -50,9 +51,7 @@ export default function Component() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: navItems.length * 0.1, duration: 0.5 }}
           >
-            <Button variant="default" className="bg-green-600 hover:bg-green-700 text-white">
-              <LogIn className="mr-2 h-4 w-4" /> Login
-            </Button>
+            <LoginButton />
           </motion.div>
         </nav>
         <Sheet>

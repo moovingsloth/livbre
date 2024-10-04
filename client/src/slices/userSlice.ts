@@ -1,34 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchUser } from '../actions/userActions';
+
+interface UserState {
+  user: {
+    _id: string;
+    googleId: string;
+    __v: number;
+  } | null;
+}
+
+const initialState: UserState = {
+  user: null,
+};
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    user: null,
-    status: 'idle',
-    error: null,
-  },
-  reducers: {
-    login: (state, action) => {
-        console.log(action);
-    }
-  },
+  initialState,
+  reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchUser.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.user = action.payload;
-      })
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      });
+    builder.addCase(fetchUser.fulfilled, (state, action: PayloadAction<UserState['user']>) => {
+      state.user = action.payload;
+    });
   },
 });
-
-export const { login } = userSlice.actions;
 
 export default userSlice.reducer;

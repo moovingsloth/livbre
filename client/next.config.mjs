@@ -1,13 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async rewrites() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: 'http://localhost:2000/api/:path*', // 백엔드 서버 URL로 변경
-        },
-      ];
-    },
-  };
-  
-  export default nextConfig;
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:2000/api/:path*', // Proxy to Backend
+      },
+      {
+        source: '/auth/google',
+        destination: 'http://localhost:2000/auth/google', // Proxy to Backend
+      },
+    ];
+  },
+};
+
+export default nextConfig;

@@ -1,4 +1,6 @@
 
+const keys = require('../config/keys')
+
 const passport = require('passport');
 module.exports = app => {
     app.get('/auth/google', passport.authenticate('google', {
@@ -6,7 +8,13 @@ module.exports = app => {
     })
     );
 
-    app.get('/auth/google/callback', passport.authenticate('google'));  
+    app.get('/auth/google/callback', 
+        passport.authenticate('google'),
+        (req, res) => {
+            const clientUrl = keys.clientURL;
+            res.redirect(clientUrl);
+        }   
+    );
 
     app.get('/api/logout', (req, res) => {
         req.logout();

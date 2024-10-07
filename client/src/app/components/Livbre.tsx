@@ -1,85 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { Menu, Book, Leaf, LogIn } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import LoginButton from "./LoginButton"
 
 export default function Component() {
-  const [isHovered, setIsHovered] = useState(false)
-
-  const navItems = ["About", "Books", "Community", "Contact"]
 
   return (
     <div className="min-h-screen bg-white text-gray-800 flex flex-col">
-      <header className="w-full py-4 px-6 flex justify-between items-center bg-green-50">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Link href="/" className="text-2xl font-bold tracking-tighter flex items-center text-green-600">
-            <Book className="mr-2" />
-            livbre
-          </Link>
-        </motion.div>
-        <nav className="hidden md:flex items-center space-x-6">
-          {navItems.map((item, index) => (
-            <motion.div
-              key={item}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-            >
-              <Link
-                href={`#${item.toLowerCase()}`}
-                className="text-sm uppercase tracking-wider hover:text-green-500 transition-colors"
-              >
-                {item}
-              </Link>
-            </motion.div>
-          ))}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: navItems.length * 0.1, duration: 0.5 }}
-          >
-            <LoginButton />
-          </motion.div>
-        </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="bg-white text-gray-800">
-            <nav className="flex flex-col space-y-4 mt-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-lg uppercase tracking-wider hover:text-green-500 transition-colors"
-                >
-                  {item}
-                </Link>
-              ))}
-              <Button variant="default" className="bg-green-600 hover:bg-green-700 text-white">
-                <LogIn className="mr-2 h-4 w-4" /> Login
-              </Button>
-            </nav>
-          </SheetContent>
-        </Sheet>
-      </header>
-
       <main className="flex-grow flex flex-col items-center justify-center p-4">
         <motion.h1
           className="text-6xl md:text-8xl font-bold mb-8 tracking-tighter"
@@ -87,9 +14,9 @@ export default function Component() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          liv
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">
-            bre
+          리
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+            브르
           </span>
         </motion.h1>
 
@@ -99,55 +26,45 @@ export default function Component() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          Cultivating knowledge, growing communities through shared stories
+          <p style={{ color: "#2c3e50", fontSize: "1.2em" }}>안녕하세요, 저는 책 읽는 공룡 
+            <span style={{ fontWeight: "bold", fontSize: "1.1em", color: "#4286ca" }}>&apos;리브로돈&apos;</span>이에요! </p>
+          <p>가장 똑똑했던 공룡 &apos;트로오돈&apos;의 후예죠.</p>
+          <p>요즘 &lt;닭이 공룡이라고?&gt;를 읽고 있답니다!</p>
+          <p>제 친구 &apos;마이아&apos;가 빌려줬어요.</p>
         </motion.p>
-
-        <motion.div
-          className="relative w-64 h-64 mb-12"
-          animate={{ rotate: isHovered ? 180 : 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <svg
-            viewBox="0 0 200 200"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-full"
-          >
-            <motion.path
-              d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-              fill="none"
-              stroke="url(#eco-gradient)"
-              strokeWidth="8"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-            <defs>
-              <linearGradient id="eco-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#10B981" />
-                <stop offset="100%" stopColor="#34D399" />
-              </linearGradient>
-            </defs>
-          </svg>
+        <Link href="/books">
           <motion.div
-            className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-green-500"
-            animate={{ opacity: isHovered ? 1 : 0 }}
+            className="box"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "400px", // 크기 조정 (필요시 변경)
+              height: "400px", // 크기 조정 (필요시 변경)
+              backgroundColor: "#4286ca", // 배경색 설정 (필요시 삭제 가능) 
+              border: "1px solid #4286ca", // 테두리 추가
+              borderRadius: "100%", // 테두리 둥글게
+            }}
           >
-            <Leaf className="h-12 w-12" />
+            <img src="/images/livbre_logo_circle.png" alt="Book Icon" className="h-30 w-30" />
           </motion.div>
-        </motion.div>
+        </Link>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full mt-16">
           {["SHARE", "LEARN", "GROW"].map((text, index) => (
             <motion.div
               key={text}
-              className="bg-green-50 p-6 rounded-lg text-center shadow-md"
+              className="bg-blue-50 p-6 rounded-lg text-center shadow-md mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + index * 0.2, duration: 0.6 }}
             >
-              <h2 className="text-2xl font-bold mb-2 text-green-600">{text}</h2>
+              <h2 className="text-2xl font-bold mb-2 text-blue-600">{text}</h2>
               <p className="text-sm text-gray-600">
                 {text === "SHARE" && "Contribute your books to our community library."}
                 {text === "LEARN" && "Discover new worlds through shared literature."}

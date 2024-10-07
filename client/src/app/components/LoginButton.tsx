@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../lib/store';
@@ -36,7 +38,7 @@ const LoginButton: React.FC = () => {
 
   return (
     <Link href="/auth/google">
-      <Button variant="default" className="bg-green-600 hover:bg-green-700 text-white">
+      <Button variant="default" className="bg-blue-600 hover:bg-blue-700 text-white">
         <LogIn className="mr-2 h-4 w-4" /> Login
       </Button>
     </Link>

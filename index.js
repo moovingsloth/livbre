@@ -2,47 +2,61 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors');
 const keys = require('./config/keys');
+const next = require('next');
+
 require('./models/User.js');
-require('./models/Book.js'); // Ensure Book model is included
+require('./models/Book.js');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
 
-const app = express();
+const dev = process.env.NODE_ENV !== 'production';
+const nextApp = next({ dev, dir: './client' }); // Specify the client directory
+const handle = nextApp.getRequestHandler();
 
-app.use(express.json());
+nextApp.prepare().then(() => {
+  const app = express();
 
-// Enable CORS for all routes
-// CORS 설정
-app.use(cors({
-    origin: 'http://localhost:3000', // 허용할 출처
+  app.use(express.json());
+
+  // Enable CORS for all routes
+  app.use(cors({
+    origin: dev ? 'http://localhost:3000' : 'https://agile-river-56065-ef389f3444b0.herokuapp.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true // 쿠키 전송을 허용하려면 true로 설정
-}));
-app.use(
+    credentials: true
+  }));
+
+  app.use(
     cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        keys: [keys.cookieKey]
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      keys: [keys.cookieKey]
     })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-require('./routes/authRoutes')(app);
-require('./routes/bookRoutes')(app); // Ensure bookRoutes is included
+  require('./routes/authRoutes')(app);
+  require('./routes/bookRoutes')(app);
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+  if (process.env.NODE_ENV === 'production') {
+    // Serve static files from the Next.js build directory
+    app.use(express.static('client/.next'));
 
-    const path = require('path');
+    // Serve the Next.js application
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+      return handle(req, res);
     });
-}
+  } else {
+    // Serve the Next.js application
+    app.get('*', (req, res) => {
+      return handle(req, res);
+    });
+  }
 
-const PORT = process.env.PORT || 2000;
-app.listen(PORT, () => {
-    console.log('Server is running on port 2000');
+  const PORT = process.env.PORT || 2000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 });

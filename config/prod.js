@@ -6,5 +6,5 @@ module.exports = {
     clientURL: process.env.CLIENT_URL,
     serverURL: process.env.SERVER_URL,
     naverClientID: process.env.NAVER_CLIENT_ID,
-    naverClientSecret: process.env.NAVER_CLIENT_SECRET
+    naverClientSecret: process.env.NAVER_CLIENT_SECRET,
 };

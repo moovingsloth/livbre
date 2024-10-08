@@ -26,11 +26,13 @@ export default function Component() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <p style={{ color: "#2c3e50", fontSize: "1.2em" }}>안녕하세요, 저는 책 읽는 공룡 
-            <span style={{ fontWeight: "bold", fontSize: "1.1em", color: "#4286ca" }}>&apos;리브로돈&apos;</span>이에요! </p>
-          <p>가장 똑똑했던 공룡 &apos;트로오돈&apos;의 후예죠.</p>
-          <p>요즘 &lt;닭이 공룡이라고?&gt;를 읽고 있답니다!</p>
-          <p>제 친구 &apos;마이아&apos;가 빌려줬어요.</p>
+          <div>
+            <p style={{ color: "#2c3e50", fontSize: "1.2em" }}>안녕하세요, 저는 책 읽는 공룡 
+              <span style={{ fontWeight: "bold", fontSize: "1.1em", color: "#4286ca" }}>&apos;리브로돈&apos;</span>이에요! </p>
+            <p>가장 똑똑했던 공룡 &apos;트로오돈&apos;의 후예죠.</p>
+            <p>요즘 &lt;닭이 공룡이라고?&gt;를 읽고 있답니다!</p>
+            <p>제 친구 &apos;마이아&apos;가 빌려줬어요.</p>
+          </div>
         </motion.p>
         <Link href="/books">
           <motion.div

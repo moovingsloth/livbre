@@ -10,6 +10,10 @@ const nextConfig = {
         source: '/auth/google',
         destination: 'http://localhost:2000/auth/google', // Proxy to Backend
       },
+      {
+        source: '/auth/google/callback',
+        destination: 'http://localhost:2000/auth/google/callback', // Proxy to Backend
+      },
     ];
   },
 };

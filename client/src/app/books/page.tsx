@@ -34,7 +34,8 @@ export default function BooksPage() {
   }
   const fetchBooks = async () => {
     try {
-      const response = await axios.get('http://localhost:2000/api/books');
+      const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await axios.get(`${baseURL}/api/books`);
       setBooks(response.data);
       console.log('Books:', response.data);
     } catch (error) {
@@ -48,7 +49,8 @@ export default function BooksPage() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('http://localhost:2000/search/book', {
+      const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await axios.get(`${baseURL}/search/book`, {
         params: { query },
       });
       setShowMotionDiv(true);

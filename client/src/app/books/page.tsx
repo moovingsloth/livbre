@@ -70,7 +70,8 @@ export default function BooksPage() {
 
   const handleAddBook = async () => {
     try {
-      const response = await axios.post('http://localhost:2000/api/books', searchResults, {
+      const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await axios.post(`${baseURL}/api/books`, searchResults, {
         headers: {
           'Content-Type': 'application/json',
         },
